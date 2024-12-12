@@ -1,4 +1,4 @@
-module manajemen_tugas_master
+module akutansi-web-api
 
 go 1.22.2
 

@@ -1,24 +1,19 @@
 package app
 
 import (
-	"manajemen_tugas_master/controller"
-	"manajemen_tugas_master/repository"
-	"manajemen_tugas_master/service"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2/middleware/session"
 	"gorm.io/gorm"
+
+	"akutansi-web-api/controller"
+	"akutansi-web-api/repository"
+	"akutansi-web-api/service"
 )
 
-// user
-func InitializeRepositoryUser(db *gorm.DB) (repository.UserRepository, error) {
-	return repository.NewUserRepository(db), nil
-}
+func UserInitialize(db *gorm.DB, store *session.Store) (controller.UserController, error) {
+	userRepository := repository.NewUserRepository(db)
+	userService := service.NewUserService(userRepository, validator.New())
+	userController := controller.NewUserController(userService, store)
 
-func InitializeServiceUser(userRepository repository.UserRepository) (service.UserService, error) {
-	return service.NewUserService(userRepository, validator.New()), nil
-}
-
-func InitializeControllerUser(userService service.UserService, store *session.Store) (controller.UserController, error) {
-	return *controller.NewUserController(userService, store), nil
+	return *userController, nil
 }
