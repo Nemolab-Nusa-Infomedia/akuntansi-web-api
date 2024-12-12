@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"manajemen_tugas_master/model/domain"
-
 	"gorm.io/gorm"
+
+	"akutansi-web-api/model/domain"
 )
 
 type userRepository struct {
@@ -14,12 +14,21 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 	return &userRepository{db}
 }
 
-func (r *userRepository) Signup(user *domain.User) error {
+func (r *userRepository) FindAll() ([]*domain.UserPublic, error) {
+	var users []*domain.UserPublic
 
-	return nil
-}
+	err := r.db.Table("users").Select(
+		"id",
+		"created_at",
+		"updated_at",
 
-func (r *userRepository) Login(user *domain.User) (*domain.User, error) {
+		"phone",
+		"email",
+		"name",
+	).Find(&users).Error
 
-	return nil, nil
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
 }
