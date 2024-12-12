@@ -7,14 +7,13 @@ import (
 )
 
 func SetupRoutes(app *fiber.App, db *gorm.DB, store *session.Store) {
-	// user initialize
-	userRepository, _ := InitializeRepositoryUser(db)
-	userService, _ := InitializeServiceUser(userRepository)
-	userController, _ := InitializeControllerUser(userService, store)
+	// Set 'api' prefix
+	baseRoute := app.Group("/api")
 
-	// Group route untuk user
-	userRoutes := app.Group("/")
-	userRoutes.Post("user/signup", userController.SignupUser)
-	userRoutes.Post("user/login", userController.LoginUser)
-	// userRoutes.Use(middleware.AuthUser(userService, store))
+	// Initialize
+	userController, _ := UserInitialize(db, store)
+
+	// User routes
+	userRoutes := baseRoute.Group("/user")
+	userRoutes.Get("/get", userController.GetAll)
 }
