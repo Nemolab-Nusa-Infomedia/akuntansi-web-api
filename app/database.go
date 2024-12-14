@@ -28,6 +28,7 @@ func ConnectDB() (*gorm.DB, error) {
 	if err := db.AutoMigrate(
 		&domain.Company{},
 		&domain.User{},
+		&domain.UserCompany{},
 	); err != nil {
 		return nil, err
 	}
