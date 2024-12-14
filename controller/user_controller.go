@@ -8,6 +8,12 @@ import (
 	"akutansi-web-api/service"
 )
 
+/*
+| -----------------------------------------------------------------
+| PREPARATION
+| -----------------------------------------------------------------
+*/
+
 type UserController struct {
 	userService service.UserService
 	store       *session.Store
@@ -19,6 +25,12 @@ func NewUserController(userService service.UserService, store *session.Store) *U
 		store:       store,
 	}
 }
+
+/*
+| -----------------------------------------------------------------
+| FUNCTIONS
+| -----------------------------------------------------------------
+*/
 
 func (c *UserController) GetAll(ctx *fiber.Ctx) error {
 	users, err := c.userService.FindAllUsers()
