@@ -29,15 +29,7 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 func (r *userRepository) FindAll() ([]*domain.UserPublic, error) {
 	var users []*domain.UserPublic
 
-	err := r.db.Table("users").Select(
-		"id",
-		"created_at",
-		"updated_at",
-
-		"phone",
-		"email",
-		"name",
-	).Find(&users).Error
+	err := r.db.Model(domain.User{}).Find(&users).Error
 
 	if err != nil {
 		return nil, err
