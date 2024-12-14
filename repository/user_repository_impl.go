@@ -6,6 +6,12 @@ import (
 	"akutansi-web-api/model/domain"
 )
 
+/*
+| -----------------------------------------------------------------
+| PREPARATIONS
+| -----------------------------------------------------------------
+*/
+
 type userRepository struct {
 	db *gorm.DB
 }
@@ -13,6 +19,12 @@ type userRepository struct {
 func NewUserRepository(db *gorm.DB) UserRepository {
 	return &userRepository{db}
 }
+
+/*
+| -----------------------------------------------------------------
+| FUNCTIONS
+| -----------------------------------------------------------------
+*/
 
 func (r *userRepository) FindAll() ([]*domain.UserPublic, error) {
 	var users []*domain.UserPublic
