@@ -7,13 +7,24 @@ import (
 )
 
 func SetupRoutes(app *fiber.App, db *gorm.DB, store *session.Store) {
-	// Set 'api' prefix
+	/*
+		| -----------------------------------------------------------------
+		| PREPARATIONS
+		| -----------------------------------------------------------------
+	*/
+
 	baseRoute := app.Group("/api")
 
-	// Initialize
 	userController, _ := UserInitialize(db, store)
+
+	/*
+		| -----------------------------------------------------------------
+		| ROUTES
+		| -----------------------------------------------------------------
+	*/
 
 	// User routes
 	userRoutes := baseRoute.Group("/user")
+
 	userRoutes.Get("/get", userController.GetAll)
 }

@@ -7,6 +7,12 @@ import (
 	"akutansi-web-api/repository"
 )
 
+/*
+| -----------------------------------------------------------------
+| PREPARATIONS
+| -----------------------------------------------------------------
+*/
+
 type userService struct {
 	userRepository repository.UserRepository
 	validator      *validator.Validate
@@ -18,6 +24,12 @@ func NewUserService(userRepository repository.UserRepository, validator *validat
 		validator:      validator,
 	}
 }
+
+/*
+| -----------------------------------------------------------------
+| FUNCTIONS
+| -----------------------------------------------------------------
+*/
 
 func (s *userService) FindAllUsers() ([]*domain.UserPublic, error) {
 	return s.userRepository.FindAll()
