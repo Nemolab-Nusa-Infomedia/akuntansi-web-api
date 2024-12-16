@@ -3,7 +3,7 @@ package repository
 import (
 	"gorm.io/gorm"
 
-	"akutansi-web-api/model/domain"
+	"akutansi-web-api/model"
 )
 
 /*
@@ -26,13 +26,10 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 | -----------------------------------------------------------------
 */
 
-func (r *userRepository) FindAll() ([]*domain.UserPublic, error) {
-	var users []*domain.UserPublic
+func (r *userRepository) FindAllUserPublic() ([]*model.UserPublic, error) {
+	var users []*model.UserPublic
 
-	err := r.db.Model(domain.User{}).Find(&users).Error
+	err := r.db.Model(model.User{}).Find(&users).Error
 
-	if err != nil {
-		return nil, err
-	}
-	return users, nil
+	return users, err
 }

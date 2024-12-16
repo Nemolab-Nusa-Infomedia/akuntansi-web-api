@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"akutansi-web-api/model/domain"
+	"akutansi-web-api/model"
 )
 
 func ConnectDB() (*gorm.DB, error) {
@@ -26,9 +26,9 @@ func ConnectDB() (*gorm.DB, error) {
 	log.Println("Running migrations")
 
 	if err := db.AutoMigrate(
-		&domain.Company{},
-		&domain.User{},
-		&domain.UserCompany{},
+		&model.User{},
+		&model.Company{},
+		&model.UserCompany{},
 	); err != nil {
 		return nil, err
 	}

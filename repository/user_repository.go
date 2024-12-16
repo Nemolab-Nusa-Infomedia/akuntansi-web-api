@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"akutansi-web-api/model/domain"
+	"akutansi-web-api/model"
 )
 
 type UserRepository interface {
-	FindAll() ([]*domain.UserPublic, error)
+	FindAllUserPublic() ([]*model.UserPublic, error)
 }

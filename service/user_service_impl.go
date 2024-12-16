@@ -2,8 +2,9 @@ package service
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/gofiber/fiber/v2"
 
-	"akutansi-web-api/model/domain"
+	"akutansi-web-api/helper"
 	"akutansi-web-api/repository"
 )
 
@@ -31,6 +32,19 @@ func NewUserService(userRepository repository.UserRepository, validator *validat
 | -----------------------------------------------------------------
 */
 
-func (s *userService) FindAllUsers() ([]*domain.UserPublic, error) {
-	return s.userRepository.FindAll()
+func (s *userService) FindAll(ctx *fiber.Ctx) error {
+	users, err := s.userRepository.FindAllUserPublic()
+
+	if err != nil {
+		return helper.GetResponse(ctx, &helper.Response{
+			Status:  fiber.StatusInternalServerError,
+			Message: "Internal server error",
+		})
+	}
+
+	return helper.GetResponse(ctx, &helper.Response{
+		Status:  fiber.StatusOK,
+		Message: "Success get all users",
+		Data:    users,
+	})
 }
