@@ -1,9 +1,9 @@
 package service
 
 import (
-	"akutansi-web-api/model/domain"
+	"github.com/gofiber/fiber/v2"
 )
 
 type UserService interface {
-	FindAllUsers() ([]*domain.UserPublic, error)
+	FindAll(ctx *fiber.Ctx) error
 }
