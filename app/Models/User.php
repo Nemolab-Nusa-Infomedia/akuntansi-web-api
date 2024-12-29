@@ -28,6 +28,7 @@ class User extends Authenticatable implements JWTSubject
         // REQUIRED
         'status_account',
         'password',
+        'phone',
         'name',
     ];
 

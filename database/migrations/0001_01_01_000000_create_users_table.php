@@ -18,6 +18,7 @@ return new class extends Migration {
 
             // REQUIRED
             $table->string('name', 100);
+            $table->string('phone', 100);
             $table->string('password', 255);
             $table->enum('status_account', ['active', 'disable']);
 
