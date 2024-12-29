@@ -17,10 +17,12 @@ class Company extends Model
 
     protected $fillable = [
         // REQUIRED
-        'location',
         'sub_from',
         'sub_to',
         'name',
+
+        // OPTIONAL
+        'location',
     ];
 
     protected $hidden = [];

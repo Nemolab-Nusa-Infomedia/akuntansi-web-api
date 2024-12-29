@@ -15,9 +15,11 @@ return new class extends Migration {
 
             // REQUIRED
             $table->string('name', 100);
-            $table->string('location', 100);
             $table->dateTime('sub_from');
             $table->dateTime('sub_to');
+
+            // OPTIONAL
+            $table->string('location', 100)->nullable();
 
             $table->timestamps();
         });
