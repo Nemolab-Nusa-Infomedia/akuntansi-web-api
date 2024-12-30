@@ -41,7 +41,7 @@ class LoginController extends Controller
 
                 Mail::to($user->email)->send(new OtpMailer($otp->code));
 
-                $token = Token::Generate(['sub' => $otp->id], 3);
+                $token = Token::Generate(['sub' => $otp->id, 'action' => 'login'], 3);
 
                 DB::commit();
 
