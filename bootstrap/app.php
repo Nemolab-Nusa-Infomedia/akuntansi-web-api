@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\JwtAuthenticate;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use App\Helpers\Response;
@@ -14,7 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'jwt' => JwtAuthenticate::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         if (env('APP_ENV', 'production') === 'production' || env('APP_API_JSON_RESPONSE', false) === true) {
