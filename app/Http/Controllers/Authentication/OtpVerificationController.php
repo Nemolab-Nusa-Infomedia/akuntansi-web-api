@@ -34,6 +34,10 @@ class OtpVerificationController extends Controller
                         'access_token' => $token->get('token'),
                         'exp' => $token->get('exp'),
                     ]);
+                } else if ($payload['action'] === 'forget-password') {
+                    $token = Token::Generate(['sub' => $otp->id, 'action' => 'change-password'], accessToken: true);
+
+                    $response->set(data: $token);
                 }
             } else {
                 $response->set(Response::BAD_REQUEST, 'Validasi gagal', [
