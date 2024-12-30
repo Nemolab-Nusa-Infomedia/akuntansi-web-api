@@ -16,6 +16,7 @@ trait RequestErrorMessage
         return [
             'min' => ':attribute tidak boleh kurang dari :min karakter',
             'max' => ':attribute tidak boleh melebihi :max karakter',
+            'confirmed' => 'Konfirmasi :attribute tidak sesuai',
             'email' => ':attribute harus berformat email',
             'string' => ':attribute harus berupa teks',
             'required' => ':attribute wajib diisi',
