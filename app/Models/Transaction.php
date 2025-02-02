@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class UserCompany extends Model
+class Transaction extends Model
 {
     use HasUuids;
 
@@ -16,13 +17,16 @@ class UserCompany extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'user_companies';
+    protected $table = 'transactions';
 
     protected $fillable = [
         // REQUIRED
-        'role',
+        'description',
+        'amount',
+        'date',
 
         // FOREIGN KEY
+        'transaction_category_id',
         'company_id',
         'user_id',
     ];
@@ -44,5 +48,27 @@ class UserCompany extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function transactionCategory(): BelongsTo
+    {
+        return $this->belongsTo(TransactionCategory::class);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relation - Has Many
+    |--------------------------------------------------------------------------
+    */
+
+    public function cashflows(): HasMany
+    {
+        return $this->hasMany(Cashflow::class);
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
     }
 }

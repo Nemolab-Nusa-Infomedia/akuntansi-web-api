@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration {
     /**
@@ -20,7 +21,10 @@ return new class extends Migration {
             $table->string('name', 100);
             $table->string('phone', 100);
             $table->string('password', 255);
-            $table->enum('status_account', ['active', 'disable']);
+            $table->enum('status_account', [
+                User::ACTIVE,
+                User::DISABLE,
+            ]);
 
             $table->timestamps();
         });

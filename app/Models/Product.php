@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class UserCompany extends Model
+class Product extends Model
 {
     use HasUuids;
 
@@ -16,15 +17,21 @@ class UserCompany extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'user_companies';
+    protected $table = 'products';
 
     protected $fillable = [
         // REQUIRED
-        'role',
+        'description',
+        'price_sell',
+        'image',
+        'stock',
+        'code',
+        'name',
+        'unit',
 
         // FOREIGN KEY
+        'category_id',
         'company_id',
-        'user_id',
     ];
 
     protected $hidden = [];
@@ -41,8 +48,25 @@ class UserCompany extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function user(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(ProductCategory::class);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relation - Has Many
+    |--------------------------------------------------------------------------
+    */
+
+    public function restocks(): HasMany
+    {
+        return $this->hasMany(ProductRestock::class);
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
     }
 }

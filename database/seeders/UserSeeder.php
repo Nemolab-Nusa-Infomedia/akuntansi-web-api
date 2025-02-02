@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -13,6 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $roles = Role::all();
+
         $data = [
             [
                 'status_account' => 'active',
@@ -24,7 +27,10 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            User::create($item);
+            User::create([
+                ...$item,
+                'role_id' => $roles->random()->id ?? '',
+            ]);
         }
     }
 }

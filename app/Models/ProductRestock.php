@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class ProductRestock extends Model
 {
     use HasUuids;
 
@@ -16,14 +16,16 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'product_restocks';
 
     protected $fillable = [
         // REQUIRED
-        'code',
+        'price_buy',
+        'amount',
+        'stock',
 
         // FOREIGN KEY
-        'user_id',
+        'product_id',
     ];
 
     protected $hidden = [];
@@ -35,8 +37,8 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user(): BelongsTo
+    public function product(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Product::class);
     }
 }

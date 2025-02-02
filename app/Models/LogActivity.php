@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class LogActivity extends Model
 {
     use HasUuids;
 
@@ -16,11 +16,12 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'log_activities';
 
     protected $fillable = [
         // REQUIRED
-        'code',
+        'title',
+        'body',
 
         // FOREIGN KEY
         'user_id',

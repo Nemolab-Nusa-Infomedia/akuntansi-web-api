@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Otp extends Model
+class ContactType extends Model
 {
     use HasUuids;
 
@@ -16,14 +16,11 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'contact_types';
 
     protected $fillable = [
         // REQUIRED
-        'code',
-
-        // FOREIGN KEY
-        'user_id',
+        'name',
     ];
 
     protected $hidden = [];
@@ -31,12 +28,12 @@ class Otp extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Relation - Belongs To
+    | Relation - Has Many
     |--------------------------------------------------------------------------
     */
 
-    public function user(): BelongsTo
+    public function contacts(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Contact::class, 'type_id');
     }
 }

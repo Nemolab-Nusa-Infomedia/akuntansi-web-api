@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class Cashflow extends Model
 {
     use HasUuids;
 
@@ -16,17 +16,17 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'cashflows';
 
     protected $fillable = [
-        // REQUIRED
-        'code',
-
         // FOREIGN KEY
-        'user_id',
+        'cashflow_type_id',
+        'transaction_id',
     ];
 
     protected $hidden = [];
+
+    protected $timestamps = false;
 
 
     /*
@@ -35,8 +35,13 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user(): BelongsTo
+    public function cashflowType(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(CashflowType::class);
+    }
+
+    public function transaction(): BelongsTo
+    {
+        return $this->belongsTo(Transaction::class);
     }
 }

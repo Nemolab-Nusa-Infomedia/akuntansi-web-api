@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class PaymentSubscription extends Model
 {
     use HasUuids;
 
@@ -16,17 +16,24 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'payment_subscriptions';
 
     protected $fillable = [
         // REQUIRED
-        'code',
+        'amount',
+        'status',
 
         // FOREIGN KEY
-        'user_id',
+        'subscription_id',
+        'company_id',
     ];
 
     protected $hidden = [];
+
+    // Status Value
+    public const PENDING = 'pending';
+    public const SUCCESS = 'success';
+    public const FAILED = 'failed';
 
 
     /*
@@ -35,8 +42,13 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user(): BelongsTo
+    public function subscription(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Subscription::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }

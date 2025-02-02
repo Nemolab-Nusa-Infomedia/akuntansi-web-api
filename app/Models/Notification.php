@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class Notification extends Model
 {
     use HasUuids;
 
@@ -16,14 +16,16 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'otps';
+    protected $table = 'notifications';
 
     protected $fillable = [
         // REQUIRED
-        'code',
+        'title',
+        'body',
 
         // FOREIGN KEY
-        'user_id',
+        'receiver_id',
+        'sender_id',
     ];
 
     protected $hidden = [];
@@ -35,7 +37,12 @@ class Otp extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user(): BelongsTo
+    public function sender(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -6,6 +6,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -21,6 +23,8 @@ class User extends Authenticatable implements JWTSubject
     |--------------------------------------------------------------------------
     */
 
+    protected $table = 'users';
+
     protected $fillable = [
         // UNIQUE
         'email',
@@ -30,12 +34,53 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'phone',
         'name',
+
+        // FOREIGN KEY
+        'role_id',
     ];
 
     protected $hidden = [
         'status_account',
         'password',
     ];
+
+    // Status Account Value
+    public const ACTIVE = 'active';
+    public const DISABLE = 'disable';
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relation - Belongs To
+    |--------------------------------------------------------------------------
+    */
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relation - Has Many
+    |--------------------------------------------------------------------------
+    */
+
+    public function companies(): HasMany
+    {
+        return $this->hasMany(UserCompany::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function otps(): HasMany
+    {
+        return $this->hasMany(Otp::class);
+    }
 
 
     /*

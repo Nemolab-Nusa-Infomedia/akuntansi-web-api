@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Sale extends Model
 {
     use HasUuids;
 
@@ -17,20 +17,22 @@ class Company extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'companies';
+    protected $table = 'sales';
 
     protected $fillable = [
         // REQUIRED
-        'sub_from',
-        'sub_to',
-        'name',
-
-        // OPTIONAL
-        'location',
+        'transaction_date',
+        'no_transaction',
+        'payment_team',
+        'attachment',
+        'due_date',
+        'subtotal',
+        'total',
+        'memo',
 
         // FOREIGN KEY
-        'subscription_id',
-        'category_id',
+        'transaction_id',
+        'contact_id',
     ];
 
     protected $hidden = [];
@@ -42,14 +44,14 @@ class Company extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function subscription(): BelongsTo
+    public function contact(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class);
+        return $this->belongsTo(Contact::class);
     }
 
-    public function category(): BelongsTo
+    public function transaction(): BelongsTo
     {
-        return $this->belongsTo(CompanyCategory::class);
+        return $this->belongsTo(Transaction::class);
     }
 
 
@@ -59,28 +61,8 @@ class Company extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function users(): HasMany
+    public function details(): HasMany
     {
-        return $this->hasMany(UserCompany::class);
-    }
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class);
-    }
-
-    public function productCategories(): HasMany
-    {
-        return $this->hasMany(ProductCategory::class);
-    }
-
-    public function paymentSubscriptions(): HasMany
-    {
-        return $this->hasMany(PaymentSubscription::class);
-    }
-
-    public function transactions(): HasMany
-    {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(SaleDetail::class);
     }
 }
