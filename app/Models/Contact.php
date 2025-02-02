@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\SerializeDate;
 
 class Contact extends Model
 {
-    use HasUuids;
+    use HasUuids, SerializeDate;
 
     /*
     |--------------------------------------------------------------------------
