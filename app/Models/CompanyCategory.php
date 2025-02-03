@@ -35,6 +35,6 @@ class CompanyCategory extends Model
 
     public function companies(): HasMany
     {
-        return $this->hasMany(Company::class);
+        return $this->hasMany(Company::class, 'category_id');
     }
 }
