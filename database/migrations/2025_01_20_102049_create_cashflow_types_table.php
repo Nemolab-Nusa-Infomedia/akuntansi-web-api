@@ -27,6 +27,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::table('cashflows', function (Blueprint $table): void {
+            $table->dropForeign(['cashflow_type_id']);
+        });
+
         Schema::dropIfExists('cashflow_types');
     }
 };

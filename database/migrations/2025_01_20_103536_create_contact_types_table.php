@@ -29,6 +29,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::table('contacts', function (Blueprint $table): void {
+            $table->dropForeign(['type_id']);
+        });
+
         Schema::dropIfExists('contact_types');
     }
 };
