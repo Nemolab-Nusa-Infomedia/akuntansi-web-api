@@ -30,6 +30,11 @@ use App\Http\Controllers\CashflowType\CashflowTypeDeleteController;
 use App\Http\Controllers\CashflowType\CashflowTypeGetAllController;
 use App\Http\Controllers\CashflowType\CashflowTypeGetOneController;
 use App\Http\Controllers\CashflowType\CashflowTypeUpdateController;
+use App\Http\Controllers\Notification\NotificationCreateController;
+use App\Http\Controllers\Notification\NotificationDeleteController;
+use App\Http\Controllers\Notification\NotificationGetAllController;
+use App\Http\Controllers\Notification\NotificationGetOneController;
+use App\Http\Controllers\Notification\NotificationUpdateController;
 use App\Http\Controllers\Subscription\SubscriptionCreateController;
 use App\Http\Controllers\Subscription\SubscriptionDeleteController;
 use App\Http\Controllers\Subscription\SubscriptionGetAllController;
@@ -254,4 +259,12 @@ Route::prefix('sale')->group(function (): void {
 		Route::put('update/{id}', [SaleDetailUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [SaleDetailDeleteController::class, 'action']);
 	});
+});
+
+Route::prefix('notification')->group(function (): void {
+	Route::post('create', [NotificationCreateController::class, 'action']);
+	Route::get('get', [NotificationGetAllController::class, 'action']);
+	Route::get('get/{id}', [NotificationGetOneController::class, 'action']);
+	Route::put('update/{id}', [NotificationUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [NotificationDeleteController::class, 'action']);
 });
