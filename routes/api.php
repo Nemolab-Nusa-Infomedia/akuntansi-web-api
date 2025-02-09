@@ -34,6 +34,11 @@ use App\Http\Controllers\Company\CompanyDeleteController;
 use App\Http\Controllers\Company\CompanyGetAllController;
 use App\Http\Controllers\Company\CompanyGetOneController;
 use App\Http\Controllers\Company\CompanyUpdateController;
+use App\Http\Controllers\Product\ProductCreateController;
+use App\Http\Controllers\Product\ProductDeleteController;
+use App\Http\Controllers\Product\ProductGetAllController;
+use App\Http\Controllers\Product\ProductGetOneController;
+use App\Http\Controllers\Product\ProductUpdateController;
 use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Role\RoleCreateController;
 use App\Http\Controllers\Role\RoleDeleteController;
@@ -119,6 +124,12 @@ Route::prefix('subscription')->group(function (): void {
 });
 
 Route::prefix('product')->group(function (): void {
+	Route::post('create', [ProductCreateController::class, 'action']);
+	Route::get('get', [ProductGetAllController::class, 'action']);
+	Route::get('get/{id}', [ProductGetOneController::class, 'action']);
+	Route::put('update/{id}', [ProductUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [ProductDeleteController::class, 'action']);
+
 	Route::prefix('category')->group(function (): void {
 		Route::post('create', [ProductCategoryCreateController::class, 'action']);
 		Route::get('get', [ProductCategoryGetAllController::class, 'action']);
