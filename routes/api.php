@@ -38,6 +38,11 @@ use App\Http\Controllers\Subscription\SubscriptionUpdateController;
 use App\Http\Controllers\Authentication\OtpVerificationController;
 use App\Http\Controllers\Authentication\ChangePasswordController;
 use App\Http\Controllers\Authentication\ForgetPasswordController;
+use App\Http\Controllers\ContactType\ContactTypeCreateController;
+use App\Http\Controllers\ContactType\ContactTypeDeleteController;
+use App\Http\Controllers\ContactType\ContactTypeGetAllController;
+use App\Http\Controllers\ContactType\ContactTypeGetOneController;
+use App\Http\Controllers\ContactType\ContactTypeUpdateController;
 use App\Http\Controllers\UserCompany\UserCompanyCreateController;
 use App\Http\Controllers\UserCompany\UserCompanyDeleteController;
 use App\Http\Controllers\UserCompany\UserCompanyGetAllController;
@@ -201,5 +206,15 @@ Route::prefix('cashflow')->group(function (): void {
 		Route::get('get/{id}', [CashflowTypeGetOneController::class, 'action']);
 		Route::put('update/{id}', [CashflowTypeUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [CashflowTypeDeleteController::class, 'action']);
+	});
+});
+
+Route::prefix('contact')->group(function (): void {
+	Route::prefix('type')->group(function (): void {
+		Route::post('create', [ContactTypeCreateController::class, 'action']);
+		Route::get('get', [ContactTypeGetAllController::class, 'action']);
+		Route::get('get/{id}', [ContactTypeGetOneController::class, 'action']);
+		Route::put('update/{id}', [ContactTypeUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [ContactTypeDeleteController::class, 'action']);
 	});
 });
