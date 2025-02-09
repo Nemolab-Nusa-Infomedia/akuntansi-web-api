@@ -25,6 +25,11 @@ use App\Http\Controllers\ProductRestock\ProductRestockDeleteController;
 use App\Http\Controllers\ProductRestock\ProductRestockGetAllController;
 use App\Http\Controllers\ProductRestock\ProductRestockGetOneController;
 use App\Http\Controllers\ProductRestock\ProductRestockUpdateController;
+use App\Http\Controllers\CashflowType\CashflowTypeCreateController;
+use App\Http\Controllers\CashflowType\CashflowTypeDeleteController;
+use App\Http\Controllers\CashflowType\CashflowTypeGetAllController;
+use App\Http\Controllers\CashflowType\CashflowTypeGetOneController;
+use App\Http\Controllers\CashflowType\CashflowTypeUpdateController;
 use App\Http\Controllers\Subscription\SubscriptionCreateController;
 use App\Http\Controllers\Subscription\SubscriptionDeleteController;
 use App\Http\Controllers\Subscription\SubscriptionGetAllController;
@@ -175,5 +180,15 @@ Route::prefix('transaction')->group(function (): void {
 		Route::get('get/{id}', [TransactionCategoryGetOneController::class, 'action']);
 		Route::put('update/{id}', [TransactionCategoryUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [TransactionCategoryDeleteController::class, 'action']);
+	});
+});
+
+Route::prefix('cashflow')->group(function (): void {
+	Route::prefix('type')->group(function (): void {
+		Route::post('create', [CashflowTypeCreateController::class, 'action']);
+		Route::get('get', [CashflowTypeGetAllController::class, 'action']);
+		Route::get('get/{id}', [CashflowTypeGetOneController::class, 'action']);
+		Route::put('update/{id}', [CashflowTypeUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [CashflowTypeDeleteController::class, 'action']);
 	});
 });
