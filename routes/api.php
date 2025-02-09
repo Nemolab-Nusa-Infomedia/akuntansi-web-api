@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionCreateController;
+use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionDeleteController;
+use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionGetAllController;
+use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionGetOneController;
+use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionUpdateController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryCreateController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryDeleteController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryGetAllController;
@@ -98,4 +103,12 @@ Route::prefix('subscription')->group(function (): void {
 	Route::get('get/{id}', [SubscriptionGetOneController::class, 'action']);
 	Route::put('update/{id}', [SubscriptionUpdateController::class, 'action']);
 	Route::delete('delete/{id}', [SubscriptionDeleteController::class, 'action']);
+
+	Route::prefix('payment')->group(function (): void {
+		Route::post('create', [PaymentSubscriptionCreateController::class, 'action']);
+		Route::get('get', [PaymentSubscriptionGetAllController::class, 'action']);
+		Route::get('get/{id}', [PaymentSubscriptionGetOneController::class, 'action']);
+		Route::put('update/{id}', [PaymentSubscriptionUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [PaymentSubscriptionDeleteController::class, 'action']);
+	});
 });
