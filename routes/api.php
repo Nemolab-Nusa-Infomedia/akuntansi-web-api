@@ -80,6 +80,11 @@ use App\Http\Controllers\Role\RoleDeleteController;
 use App\Http\Controllers\Role\RoleGetAllController;
 use App\Http\Controllers\Role\RoleGetOneController;
 use App\Http\Controllers\Role\RoleUpdateController;
+use App\Http\Controllers\Sale\SaleCreateController;
+use App\Http\Controllers\Sale\SaleDeleteController;
+use App\Http\Controllers\Sale\SaleGetAllController;
+use App\Http\Controllers\Sale\SaleGetOneController;
+use App\Http\Controllers\Sale\SaleUpdateController;
 use App\Http\Controllers\User\UserCreateController;
 use App\Http\Controllers\User\UserDeleteController;
 use App\Http\Controllers\User\UserGetAllController;
@@ -228,4 +233,12 @@ Route::prefix('contact')->group(function (): void {
 		Route::put('update/{id}', [ContactTypeUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [ContactTypeDeleteController::class, 'action']);
 	});
+});
+
+Route::prefix('sale')->group(function (): void {
+	Route::post('create', [SaleCreateController::class, 'action']);
+	Route::get('get', [SaleGetAllController::class, 'action']);
+	Route::get('get/{id}', [SaleGetOneController::class, 'action']);
+	Route::put('update/{id}', [SaleUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [SaleDeleteController::class, 'action']);
 });
