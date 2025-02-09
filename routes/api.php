@@ -14,6 +14,11 @@ use App\Http\Controllers\Authentication\OtpVerificationController;
 use App\Http\Controllers\Authentication\ChangePasswordController;
 use App\Http\Controllers\Authentication\ForgetPasswordController;
 use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\Company\CompanyCreateController;
+use App\Http\Controllers\Company\CompanyDeleteController;
+use App\Http\Controllers\Company\CompanyGetAllController;
+use App\Http\Controllers\Company\CompanyGetOneController;
+use App\Http\Controllers\Company\CompanyUpdateController;
 use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Role\RoleCreateController;
 use App\Http\Controllers\Role\RoleDeleteController;
@@ -59,6 +64,12 @@ Route::prefix('user')->group(function (): void {
 });
 
 Route::prefix('company')->group(function (): void {
+	Route::post('create', [CompanyCreateController::class, 'action']);
+	Route::get('get', [CompanyGetAllController::class, 'action']);
+	Route::get('get/{id}', [CompanyGetOneController::class, 'action']);
+	Route::put('update/{id}', [CompanyUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [CompanyDeleteController::class, 'action']);
+
 	Route::prefix('category')->group(function (): void {
 		Route::post('create', [CompanyCategoryCreateController::class, 'action']);
 		Route::get('get', [CompanyCategoryGetAllController::class, 'action']);
