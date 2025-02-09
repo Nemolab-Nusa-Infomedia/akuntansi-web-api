@@ -53,6 +53,11 @@ use App\Http\Controllers\Transaction\TransactionDeleteController;
 use App\Http\Controllers\Transaction\TransactionGetAllController;
 use App\Http\Controllers\Transaction\TransactionGetOneController;
 use App\Http\Controllers\Transaction\TransactionUpdateController;
+use App\Http\Controllers\SaleDetail\SaleDetailCreateController;
+use App\Http\Controllers\SaleDetail\SaleDetailDeleteController;
+use App\Http\Controllers\SaleDetail\SaleDetailGetAllController;
+use App\Http\Controllers\SaleDetail\SaleDetailGetOneController;
+use App\Http\Controllers\SaleDetail\SaleDetailUpdateController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Cashflow\CashflowCreateController;
 use App\Http\Controllers\Cashflow\CashflowDeleteController;
@@ -241,4 +246,12 @@ Route::prefix('sale')->group(function (): void {
 	Route::get('get/{id}', [SaleGetOneController::class, 'action']);
 	Route::put('update/{id}', [SaleUpdateController::class, 'action']);
 	Route::delete('delete/{id}', [SaleDeleteController::class, 'action']);
+
+	Route::prefix('detail')->group(function (): void {
+		Route::post('create', [SaleDetailCreateController::class, 'action']);
+		Route::get('get', [SaleDetailGetAllController::class, 'action']);
+		Route::get('get/{id}', [SaleDetailGetOneController::class, 'action']);
+		Route::put('update/{id}', [SaleDetailUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [SaleDetailDeleteController::class, 'action']);
+	});
 });
