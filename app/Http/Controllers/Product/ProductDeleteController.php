@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +19,14 @@ class ProductDeleteController extends Controller
             DB::beginTransaction();
 
             try {
+                $image = $product->image;
+
                 $product->delete();
+
+                $image = str_replace(url('storage') . '/', '', $image);
+                if (Storage::has($image)) {
+                    Storage::delete($image);
+                }
 
                 DB::commit();
 

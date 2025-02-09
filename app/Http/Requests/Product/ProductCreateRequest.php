@@ -28,7 +28,7 @@ class ProductCreateRequest extends FormRequest
             'price_sell' => 'bail|required|numeric|integer|min:0|max_digits:20|max:18446744073709551615',
             'stock' => 'bail|required|numeric|integer|min:0|max_digits:10|max:4294967295',
             'description' => 'bail|required|string|max:65535',
-            'image' => 'bail|required|file|max:10000',
+            'image' => 'bail|required|file|image|max:10000',
             'code' => 'bail|required|string|max:100',
             'name' => 'bail|required|string|max:100',
             'unit' => 'bail|required|string|max:100',
