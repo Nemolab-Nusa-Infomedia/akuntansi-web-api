@@ -5,6 +5,11 @@ use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionDeleteController
 use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionGetAllController;
 use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionGetOneController;
 use App\Http\Controllers\PaymentSubscription\PaymentSubscriptionUpdateController;
+use App\Http\Controllers\TransactionCategory\TransactionCategoryCreateController;
+use App\Http\Controllers\TransactionCategory\TransactionCategoryDeleteController;
+use App\Http\Controllers\TransactionCategory\TransactionCategoryGetAllController;
+use App\Http\Controllers\TransactionCategory\TransactionCategoryGetOneController;
+use App\Http\Controllers\TransactionCategory\TransactionCategoryUpdateController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryCreateController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryDeleteController;
 use App\Http\Controllers\CompanyCategory\CompanyCategoryGetAllController;
@@ -149,5 +154,15 @@ Route::prefix('product')->group(function (): void {
 		Route::get('get/{id}', [ProductRestockGetOneController::class, 'action']);
 		Route::put('update/{id}', [ProductRestockUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [ProductRestockDeleteController::class, 'action']);
+	});
+});
+
+Route::prefix('transaction')->group(function (): void {
+	Route::prefix('category')->group(function (): void {
+		Route::post('create', [TransactionCategoryCreateController::class, 'action']);
+		Route::get('get', [TransactionCategoryGetAllController::class, 'action']);
+		Route::get('get/{id}', [TransactionCategoryGetOneController::class, 'action']);
+		Route::put('update/{id}', [TransactionCategoryUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [TransactionCategoryDeleteController::class, 'action']);
 	});
 });
