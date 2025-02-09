@@ -13,6 +13,11 @@ use App\Http\Controllers\Subscription\SubscriptionUpdateController;
 use App\Http\Controllers\Authentication\OtpVerificationController;
 use App\Http\Controllers\Authentication\ChangePasswordController;
 use App\Http\Controllers\Authentication\ForgetPasswordController;
+use App\Http\Controllers\UserCompany\UserCompanyCreateController;
+use App\Http\Controllers\UserCompany\UserCompanyDeleteController;
+use App\Http\Controllers\UserCompany\UserCompanyGetAllController;
+use App\Http\Controllers\UserCompany\UserCompanyGetOneController;
+use App\Http\Controllers\UserCompany\UserCompanyUpdateController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Company\CompanyCreateController;
 use App\Http\Controllers\Company\CompanyDeleteController;
@@ -61,6 +66,14 @@ Route::prefix('user')->group(function (): void {
 	Route::get('get/{id}', [UserGetOneController::class, 'action']);
 	Route::put('update/{id}', [UserUpdateController::class, 'action']);
 	Route::delete('delete/{id}', [UserDeleteController::class, 'action']);
+
+	Route::prefix('company')->group(function (): void {
+		Route::post('create', [UserCompanyCreateController::class, 'action']);
+		Route::get('get', [UserCompanyGetAllController::class, 'action']);
+		Route::get('get/{id}', [UserCompanyGetOneController::class, 'action']);
+		Route::put('update/{id}', [UserCompanyUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [UserCompanyDeleteController::class, 'action']);
+	});
 });
 
 Route::prefix('company')->group(function (): void {
