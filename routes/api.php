@@ -38,6 +38,11 @@ use App\Http\Controllers\UserCompany\UserCompanyDeleteController;
 use App\Http\Controllers\UserCompany\UserCompanyGetAllController;
 use App\Http\Controllers\UserCompany\UserCompanyGetOneController;
 use App\Http\Controllers\UserCompany\UserCompanyUpdateController;
+use App\Http\Controllers\Transaction\TransactionCreateController;
+use App\Http\Controllers\Transaction\TransactionDeleteController;
+use App\Http\Controllers\Transaction\TransactionGetAllController;
+use App\Http\Controllers\Transaction\TransactionGetOneController;
+use App\Http\Controllers\Transaction\TransactionUpdateController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Company\CompanyCreateController;
 use App\Http\Controllers\Company\CompanyDeleteController;
@@ -158,6 +163,12 @@ Route::prefix('product')->group(function (): void {
 });
 
 Route::prefix('transaction')->group(function (): void {
+	Route::post('create', [TransactionCreateController::class, 'action']);
+	Route::get('get', [TransactionGetAllController::class, 'action']);
+	Route::get('get/{id}', [TransactionGetOneController::class, 'action']);
+	Route::put('update/{id}', [TransactionUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [TransactionDeleteController::class, 'action']);
+
 	Route::prefix('category')->group(function (): void {
 		Route::post('create', [TransactionCategoryCreateController::class, 'action']);
 		Route::get('get', [TransactionCategoryGetAllController::class, 'action']);
