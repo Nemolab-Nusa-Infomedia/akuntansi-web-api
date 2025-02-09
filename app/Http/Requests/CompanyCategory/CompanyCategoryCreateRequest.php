@@ -37,7 +37,7 @@ class CompanyCategoryCreateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Kategori Perusahaan',
+            'name' => 'Kategori',
         ];
     }
 }

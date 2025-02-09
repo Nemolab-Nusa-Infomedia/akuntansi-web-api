@@ -20,13 +20,13 @@ class CompanyCategoryCreateController extends Controller
         DB::beginTransaction();
 
         try {
-            $role = CompanyCategory::create([
+            $companyCategory = CompanyCategory::create([
                 'name' => $name,
             ]);
 
             DB::commit();
 
-            return Response::SetAndGet(message: 'Berhasil menambahkan kategori perusahaan', data: $role);
+            return Response::SetAndGet(message: 'Berhasil menambahkan kategori perusahaan', data: $companyCategory);
         } catch (\Exception $e) {
             DB::rollBack();
 

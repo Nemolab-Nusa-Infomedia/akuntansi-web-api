@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\CompanyCategory;
+namespace App\Http\Requests\ProductCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\RequestErrorMessage;
 
-class CompanyCategoryUpdateRequest extends FormRequest
+class ProductCategoryCreateRequest extends FormRequest
 {
     use RequestErrorMessage;
 
@@ -26,6 +26,8 @@ class CompanyCategoryUpdateRequest extends FormRequest
     {
         return [
             'name' => 'bail|required|string|max:100',
+
+            'company_id' => 'bail|required|string|exists:companies,id',
         ];
     }
 
@@ -37,7 +39,9 @@ class CompanyCategoryUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Kategori',
+            'name' => 'Nama Kategori Perusahaan',
+
+            'company_id' => 'Perusahaan',
         ];
     }
 }
