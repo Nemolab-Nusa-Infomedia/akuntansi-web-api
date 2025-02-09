@@ -15,6 +15,11 @@ use App\Http\Controllers\ProductCategory\ProductCategoryDeleteController;
 use App\Http\Controllers\ProductCategory\ProductCategoryGetAllController;
 use App\Http\Controllers\ProductCategory\ProductCategoryGetOneController;
 use App\Http\Controllers\ProductCategory\ProductCategoryUpdateController;
+use App\Http\Controllers\ProductRestock\ProductRestockCreateController;
+use App\Http\Controllers\ProductRestock\ProductRestockDeleteController;
+use App\Http\Controllers\ProductRestock\ProductRestockGetAllController;
+use App\Http\Controllers\ProductRestock\ProductRestockGetOneController;
+use App\Http\Controllers\ProductRestock\ProductRestockUpdateController;
 use App\Http\Controllers\Subscription\SubscriptionCreateController;
 use App\Http\Controllers\Subscription\SubscriptionDeleteController;
 use App\Http\Controllers\Subscription\SubscriptionGetAllController;
@@ -136,5 +141,13 @@ Route::prefix('product')->group(function (): void {
 		Route::get('get/{id}', [ProductCategoryGetOneController::class, 'action']);
 		Route::put('update/{id}', [ProductCategoryUpdateController::class, 'action']);
 		Route::delete('delete/{id}', [ProductCategoryDeleteController::class, 'action']);
+	});
+
+	Route::prefix('restock')->group(function (): void {
+		Route::post('create', [ProductRestockCreateController::class, 'action']);
+		Route::get('get', [ProductRestockGetAllController::class, 'action']);
+		Route::get('get/{id}', [ProductRestockGetOneController::class, 'action']);
+		Route::put('update/{id}', [ProductRestockUpdateController::class, 'action']);
+		Route::delete('delete/{id}', [ProductRestockDeleteController::class, 'action']);
 	});
 });
