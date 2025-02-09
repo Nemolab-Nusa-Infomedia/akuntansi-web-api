@@ -49,6 +49,11 @@ use App\Http\Controllers\Transaction\TransactionGetAllController;
 use App\Http\Controllers\Transaction\TransactionGetOneController;
 use App\Http\Controllers\Transaction\TransactionUpdateController;
 use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\Cashflow\CashflowCreateController;
+use App\Http\Controllers\Cashflow\CashflowDeleteController;
+use App\Http\Controllers\Cashflow\CashflowGetAllController;
+use App\Http\Controllers\Cashflow\CashflowGetOneController;
+use App\Http\Controllers\Cashflow\CashflowUpdateController;
 use App\Http\Controllers\Company\CompanyCreateController;
 use App\Http\Controllers\Company\CompanyDeleteController;
 use App\Http\Controllers\Company\CompanyGetAllController;
@@ -184,6 +189,12 @@ Route::prefix('transaction')->group(function (): void {
 });
 
 Route::prefix('cashflow')->group(function (): void {
+	Route::post('create', [CashflowCreateController::class, 'action']);
+	Route::get('get', [CashflowGetAllController::class, 'action']);
+	Route::get('get/{id}', [CashflowGetOneController::class, 'action']);
+	Route::put('update/{id}', [CashflowUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [CashflowDeleteController::class, 'action']);
+
 	Route::prefix('type')->group(function (): void {
 		Route::post('create', [CashflowTypeCreateController::class, 'action']);
 		Route::get('get', [CashflowTypeGetAllController::class, 'action']);
