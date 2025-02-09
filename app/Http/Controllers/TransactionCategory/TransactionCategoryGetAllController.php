@@ -27,7 +27,7 @@ class TransactionCategoryGetAllController extends Controller
             );
         }
 
-        $transactionCategorys = $transactionCategorys->orderBy('name')->get();
+        $transactionCategorys = $transactionCategorys->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar kategori transaksi', data: $transactionCategorys);
     }

@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->text('payment_address');
             $table->string('name_bank', 100);
             $table->string('no_bank', 100);
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
         });

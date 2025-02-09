@@ -26,7 +26,7 @@ class CompanyCategoryGetAllController extends Controller
             );
         }
 
-        $companyCategories = $companyCategories->orderBy('name')->get();
+        $companyCategories = $companyCategories->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar kategori perusahaan', data: $companyCategories);
     }

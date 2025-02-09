@@ -27,7 +27,7 @@ class CashflowTypeGetAllController extends Controller
             );
         }
 
-        $cashflowTypes = $cashflowTypes->orderBy('name')->get();
+        $cashflowTypes = $cashflowTypes->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar tipe alur pembayaran', data: $cashflowTypes);
     }

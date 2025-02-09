@@ -26,7 +26,7 @@ class ProductCategoryGetAllController extends Controller
             );
         }
 
-        $productCategories = $productCategories->orderBy('name')->get();
+        $productCategories = $productCategories->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar kategori produk', data: $productCategories);
     }

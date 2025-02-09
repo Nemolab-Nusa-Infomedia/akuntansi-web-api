@@ -26,7 +26,7 @@ class RoleGetAllController extends Controller
             );
         }
 
-        $roles = $roles->orderBy('name')->get();
+        $roles = $roles->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar akses', data: $roles);
     }

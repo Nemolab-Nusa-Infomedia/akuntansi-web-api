@@ -63,6 +63,11 @@ use App\Http\Controllers\Company\CompanyCreateController;
 use App\Http\Controllers\Company\CompanyDeleteController;
 use App\Http\Controllers\Company\CompanyGetAllController;
 use App\Http\Controllers\Company\CompanyGetOneController;
+use App\Http\Controllers\Contact\ContactCreateController;
+use App\Http\Controllers\Contact\ContactDeleteController;
+use App\Http\Controllers\Contact\ContactGetAllController;
+use App\Http\Controllers\Contact\ContactGetOneController;
+use App\Http\Controllers\Contact\ContactUpdateController;
 use App\Http\Controllers\Company\CompanyUpdateController;
 use App\Http\Controllers\Product\ProductCreateController;
 use App\Http\Controllers\Product\ProductDeleteController;
@@ -210,6 +215,12 @@ Route::prefix('cashflow')->group(function (): void {
 });
 
 Route::prefix('contact')->group(function (): void {
+	Route::post('create', [ContactCreateController::class, 'action']);
+	Route::get('get', [ContactGetAllController::class, 'action']);
+	Route::get('get/{id}', [ContactGetOneController::class, 'action']);
+	Route::put('update/{id}', [ContactUpdateController::class, 'action']);
+	Route::delete('delete/{id}', [ContactDeleteController::class, 'action']);
+
 	Route::prefix('type')->group(function (): void {
 		Route::post('create', [ContactTypeCreateController::class, 'action']);
 		Route::get('get', [ContactTypeGetAllController::class, 'action']);

@@ -26,7 +26,7 @@ class ContactTypeGetAllController extends Controller
             );
         }
 
-        $contactTypes = $contactTypes->orderBy('name')->get();
+        $contactTypes = $contactTypes->latest()->get();
 
         return Response::SetAndGet(message: 'Berhasil mendapatkan daftar tipe kontak', data: $contactTypes);
     }
